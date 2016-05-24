@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Onimla\\HTML": "."
+            "Onimla\\HTML\\": "."
         }
     }
 }
