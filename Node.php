@@ -109,20 +109,12 @@ class Node {
         return count($this->children);
     }
 
-    public function count() {
-        return call_user_func(array($this, 'length'));
-    }
-
     public function countChildren() {
-        return call_user_func(array($this, 'length'));
+        return call_user_func_array(array($this, 'length'), func_get_args());
     }
 
     public function getChildren() {
         return $this->children;
-    }
-
-    public function countChildrentoArray() {
-        return call_user_func(array($this, 'getChildren'));
     }
 
     public function eq($index) {
@@ -142,16 +134,6 @@ class Node {
         }
 
         return FALSE;
-    }
-    
-    public function setParent($parent) {
-        foreach ($this->children as $child) {
-            if (is_object($child) AND method_exists($child, __FUNCTION__)) {
-                $child->setParent($parent);
-            }
-        }
-        
-        return $this;
     }
 
     protected final function addChildren($children) {
