@@ -2,11 +2,6 @@
 
 namespace Onimla\HTML;
 
-require_once 'Node.class.php';
-require_once 'HasAttribute.class.php';
-require_once 'Appendable.class.php';
-require_once 'Attribute.class.php';
-
 /**
  * An HTML element.
  *
