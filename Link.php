@@ -6,7 +6,7 @@ require_once 'Element.class.php';
 
 class Link extends Element {
 
-    function __construct($href, $media = NULL, $type = 'text/css', $rel = 'stylesheet') {
+    function __construct($href, $media = FALSE, $type = 'text/css', $rel = 'stylesheet') {
         parent::__construct('link');
         $this->rel($rel);
         $this->type($type);
@@ -14,45 +14,36 @@ class Link extends Element {
         $this->href($href);
     }
 
-    function charset($char_encoding = FALSE) {
-        $this->attr('charset', $char_encoding);
+    function charset($charEncoding = FALSE) {
+        return $this->attr('charset', $charEncoding);
     }
 
     function href($url = FALSE) {
         return $this->attr('href', $url);
     }
 
-    function hreflang($language_code = FALSE) {
-        $this->attr('hreflang', $language_code);
+    function hrefLang($languageCode = FALSE) {
+        return $this->attr('hreflang', $languageCode);
     }
 
-    function media($value = NULL) {
-        if (!empty($value)) {
-            $this->attr('media', $value);
-        }
-        return $this->attr('media');
+    function media($value = FALSE) {
+        return $this->attr('media', $value);
     }
 
-    function rel($value = NULL) {
-        $this->attr('rel', $value);
+    function rel($value = FALSE) {
+        return $this->attr('rel', $value);
     }
 
-    function rev($value = NULL) {
-        $this->attr('rev', $value);
+    function rev($value = FALSE) {
+        return $this->attr('rev', $value);
     }
 
-    function target($frame_name = NULL) {
-        $this->attr('target', $frame_name);
+    function target($frameName = FALSE) {
+        return $this->attr('target', $frameName);
     }
 
-    function type($MIME_type = NULL) {
-        if (!empty($MIME_type)) {
-            $this->attr('type', $MIME_type);
-        }
-
-        return $this->attr('type');
+    function type($MIMEType = FALSE) {
+        return $this->attr('type', $MIMEType);
     }
 
 }
-
-?>
