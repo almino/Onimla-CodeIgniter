@@ -1,12 +1,22 @@
 {
     "name": "onimla/html",
-    "description": "PHP classes to generate HTML in a jQuery way",
+    "description": "Generate HTML using https://github.com/almino/Onimla-HTML and CodeIgniter functions.",
     "authors": [
         {
             "name": "Almino Melo",
             "email": "almino.melo@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/almino/Onimla-HTML"
+        }
+    ],
+    "require": {
+        "onimla/html": "*"
+    },
     "autoload": {
         "psr-4": {
             "Onimla\\HTML\\": "."
