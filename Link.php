@@ -19,7 +19,7 @@ class Link extends Element {
     }
 
     function href($url = FALSE) {
-        return $this->attr('href', $url);
+        return $this->attr('href', str_replace('\\', '/', $url));
     }
 
     function hrefLang($languageCode = FALSE) {
