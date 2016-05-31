@@ -18,6 +18,8 @@ class Style extends \Onimla\HTML\Node {
     public function __construct() {
         parent::__construct();
         $this->CI = & get_instance();
+        
+        $this->after = "\n";
     }
 
     public function __toString() {
