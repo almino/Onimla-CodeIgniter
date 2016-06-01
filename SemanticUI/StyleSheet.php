@@ -18,7 +18,7 @@ class StyleSheet extends \Onimla\HTML\Link {
             (ENVIROMENT == 'production' ? $this->production : $this->fileName) . $this->cssExtension,
         ));
         
-        parent::__construct($href, $media, $type, $rel);
+        parent::__construct($href);
     }
 
 }
