@@ -1,6 +1,6 @@
 <?php
 
-namespace Onimla\CodeIgniter\StyleSheet;
+namespace Onimla\CodeIgniter\SemanticUI;
 
 class JavaScript extends \Onimla\HTML\Script {
 
