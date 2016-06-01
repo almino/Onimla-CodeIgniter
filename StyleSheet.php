@@ -120,7 +120,7 @@ class StyleSheet extends \Onimla\HTML\Node {
 
         $this->log('$filepath = ' . $filepath);
 
-        $link = new \Onimla\HTML\Link(is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL . $filepath);
+        $link = new \Onimla\HTML\Link((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $filepath);
 
         $this->append($link);
 

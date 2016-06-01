@@ -8,14 +8,13 @@ class StyleSheet extends \Onimla\HTML\Link {
     public $defaultFolder = 'semantic/dist';
     public $fileName = 'semantic';
     public $production = 'semantic.min';
-    public $cssExtension = '.css';
-    public $jsExtension = '.js';
+    public $fileExtension = '.css';
 
     public function __construct() {
         $href = implode('/', array(
             rtrim(is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL, '/'),
             $this->defaultFolder,
-            (ENVIROMENT == 'production' ? $this->production : $this->fileName) . $this->cssExtension,
+            (ENVIROMENT == 'production' ? $this->production : $this->fileName) . $this->fileExtension,
         ));
         
         parent::__construct($href);
