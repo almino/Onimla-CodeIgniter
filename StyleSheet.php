@@ -20,13 +20,13 @@ class StyleSheet extends \Onimla\HTML\Node {
         $this->CI = & get_instance();
         
         $this->indentSource = TRUE;
-        $this->after = "\n";
+        $this->before = "        ";
     }
 
     public function __toString() {
         $this->loadFromConfigFile();
         $this->defaultFile();
-        return parent::__toString();
+        return parent::__toString() . "\n";
     }
 
     public function init() {
