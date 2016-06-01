@@ -2,7 +2,7 @@
 
 namespace Onimla\CodeIgniter;
 
-class Style extends \Onimla\HTML\Node {
+class StyleSheet extends \Onimla\HTML\Node {
 
     public $baseURL = 'base_url';
     public $defaultFolder = 'css';
@@ -19,6 +19,7 @@ class Style extends \Onimla\HTML\Node {
         parent::__construct();
         $this->CI = & get_instance();
         
+        $this->indentSource = TRUE;
         $this->after = "\n";
     }
 
