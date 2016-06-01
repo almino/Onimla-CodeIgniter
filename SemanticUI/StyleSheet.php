@@ -1,6 +1,6 @@
 <?php
 
-namespace Onimla\CodeIgniter;
+namespace Onimla\CodeIgniter\SemanticUI;
 
 class StyleSheet extends \Onimla\HTML\Link {
 
