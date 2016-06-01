@@ -26,7 +26,7 @@ class StyleSheet extends \Onimla\HTML\Node {
     public function __toString() {
         $this->loadFromConfigFile();
         $this->defaultFile();
-        return parent::__toString() . "\n";
+        return ltrim(parent::__toString()) . "\n";
     }
 
     public function init() {
