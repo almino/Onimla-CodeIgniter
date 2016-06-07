@@ -121,7 +121,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
         ## ========================================================================== ##
         log_section_header("Valor padrão do campo `{$name}`", 'debug');
         log_debug("`set_value()` : " . var_to_log(set_value($name)));
-        log_debug('`' . get_class($input) . '::value()` : ' . var_to_log($input->value()));
+        log_debug('`' . get_class($input) . '::value()` : ' . var_to_log($input->value()->getValue()));
         log_debug(__CLASS__ . "::values['{$name}']` = " . (key_exists($name, $this->values) ? var_to_log($this->values[$name]) : 'none'));
         log_debug("`\$default` = " . var_to_log($default));
 
