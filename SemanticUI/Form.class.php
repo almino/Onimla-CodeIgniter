@@ -1,6 +1,6 @@
 <?php
 
-namespace Onimla\Semantic\CodeIgniter;
+namespace Onimla\CodeIgniter\SemanticUI;
 
 class Form extends \Onimla\SemanticUI\Form\Form {
 
