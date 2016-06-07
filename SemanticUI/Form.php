@@ -4,13 +4,11 @@ namespace Onimla\CodeIgniter\SemanticUI;
 
 class Form extends \Onimla\SemanticUI\Form\Form {
 
-    protected $CI;
     protected $rules;
     protected $values = array();
 
-    public function _construct($rules = '', $method = 'post') {
+    public function __construct($rules = '', $method = 'post') {
         parent::__construct($method);
-        $this->CI = & get_instance();
 
         $this->setValidationRules($rules);
     }
@@ -19,15 +17,15 @@ class Form extends \Onimla\SemanticUI\Form\Form {
         # Se nenhuma regra foi repassada
         if (empty($rules)) {
             # Segue o padrão do CI: pega as regras definidas para a URL
-            $rules = trim($this->CI->uri->ruri_string(), '/');
+            $rules = trim(get_instance()->uri->ruri_string(), '/');
         }
 
         # Se não são as regras propriamente ditas
         if (!is_array($rules)) {
             # Carrega as regras do arquivo de validação
-            $this->CI->load->config('form_validation');
+            get_instance()->load->config('form_validation');
             # Pega as regras
-            $rules = $this->CI->config->item($rules);
+            $rules = get_instance()->config->item($rules);
         }
 
         $this->rules = $rules;
@@ -50,7 +48,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
      * @return \Onimla\HTML\Node
      */
     public function &getTextInput($name, $default = FALSE) {
-        $this->CI->load->helper(array('form'));
+        get_instance()->load->helper(array('form', 'log'));
 
         if (!empty($this->children) AND key_exists($name, $this->children)) {
             return $this->children[$name];
@@ -121,14 +119,14 @@ class Form extends \Onimla\SemanticUI\Form\Form {
         ## ========================================================================== ##
         ## Value
         ## ========================================================================== ##
-        log_section_header("Valor padrão do campo `{$field}`", 'debug');
-        log_debug("`set_value()` : " . var_to_log(set_value($field)));
+        log_section_header("Valor padrão do campo `{$name}`", 'debug');
+        log_debug("`set_value()` : " . var_to_log(set_value($name)));
         log_debug('`' . get_class($input) . '::value()` : ' . var_to_log($input->value()));
-        log_debug(__CLASS__ . "::values['{$field}']` = " . (key_exists($field, $this->values) ? var_to_log($this->values[$field]) : 'none'));
+        log_debug(__CLASS__ . "::values['{$name}']` = " . (key_exists($name, $this->values) ? var_to_log($this->values[$name]) : 'none'));
         log_debug("`\$default` = " . var_to_log($default));
 
         # Pega o valor padrão definido pelo CodeIgniter
-        $input->value(set_value($field));
+        $input->value(set_value($name));
 
         # Verifica se NÃO há um valor no campo
         if ($input->value() === FALSE OR strlen($input->value()) < 1) {
@@ -143,23 +141,23 @@ class Form extends \Onimla\SemanticUI\Form\Form {
                 # Se vier algum valor padrão
             } elseif ($default !== FALSE AND strlen($default) > 0) {
                 log_debug("O valor padrão passado para o método `" . __METHOD__ . "` é VÁLIDO.");
-                log_debug("Redefinindo o valor do campo `{$field}` para '{$default}'.");
+                log_debug("Redefinindo o valor do campo `{$name}` para '{$default}'.");
                 # Redefine o valor padrão do campo
                 $input->value($default);
             }
 
             # Se existir na variável com os valores padrão
             if (key_exists($field, $this->values)) {
-                log_debug("Alterando o valor do campo `{$field}` para o existente em "
-                        . __CLASS__ . "::values['{$field}']`.");
+                log_debug("Alterando o valor do campo `{$name}` para o existente em "
+                        . __CLASS__ . "::values['{$name}']`.");
                 # Define o valor padrão
-                $input->value($this->values[$field]);
+                $input->value($this->values[$name]);
             } else {
                 log_debug("Não existe valor padrão em `"
-                        . __CLASS__ . "::values['{$field}']`.");
+                        . __CLASS__ . "::values['{$name}']`.");
             }
         } else {
-            log_debug("O campo `{$field}` já possuía um valor.");
+            log_debug("O campo `{$name}` já possuía um valor.");
         }
 
         log_section_footer('debug');
