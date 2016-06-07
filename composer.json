@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "onimla/html": "*"
+        "onimla/html": "*",
+        "onimla/semantic-ui": "*"
     },
     "autoload": {
         "psr-4": {
