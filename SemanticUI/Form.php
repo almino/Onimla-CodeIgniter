@@ -50,7 +50,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
     public function &getTextInput($name, $default = FALSE) {
         get_instance()->load->helper(array('form', 'log'));
 
-        if (!empty($this->children) AND key_exists($name, $this->children)) {
+        if ($this->exists($name)) {
             return $this->children[$name];
         }
 
@@ -130,12 +130,12 @@ class Form extends \Onimla\SemanticUI\Form\Form {
 
         # Verifica se NÃO há um valor no campo
         if (!$input->value()->isValueSet()) {
-            log_debug("Nenhum valor no campo `{$field}`.");
+            log_debug("Nenhum valor no campo `{$name}`.");
 
             # Se o valor padrão passado para o método for NULO
             if ($default === NULL) {
                 log_debug("O valor padrão passado para o método `" . __METHOD__ . "` é `NULL`.");
-                log_debug("Removendo o valor do campo `{$field}`.");
+                log_debug("Removendo o valor do campo `{$name}`.");
                 # Remove o valor do campo
                 $input->removeAttr('value');
                 # Se vier algum valor padrão
@@ -147,7 +147,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
             }
 
             # Se existir na variável com os valores padrão
-            if (key_exists($field, $this->values)) {
+            if (key_exists($name, $this->values)) {
                 log_debug("Alterando o valor do campo `{$name}` para o existente em "
                         . __CLASS__ . "::values['{$name}']`.");
                 # Define o valor padrão
