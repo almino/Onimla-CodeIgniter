@@ -45,7 +45,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
     /**
      * @param string $name
      * @param string $default
-     * @return \Onimla\HTML\Node
+     * @return \Onimla\SemanticUI\Form\Field
      */
     public function &getTextInput($name, $default = FALSE) {
         get_instance()->load->helper(array('form', 'log'));
