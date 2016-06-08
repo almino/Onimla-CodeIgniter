@@ -129,7 +129,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
         $input->value(set_value($name));
 
         # Verifica se NÃO há um valor no campo
-        if ($input->value() === FALSE OR strlen($input->value()) < 1) {
+        if (!$input->value()->isValueSet()) {
             log_debug("Nenhum valor no campo `{$field}`.");
 
             # Se o valor padrão passado para o método for NULO
