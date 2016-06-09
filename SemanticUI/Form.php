@@ -72,7 +72,7 @@ class Form extends \Onimla\SemanticUI\Form\Form {
 
             switch ($rule) {
                 case 'required':
-                    $input->isRequired();
+                    $field->isRequired();
                     break;
                 case 'max_length':
                 case 'exact_length':
