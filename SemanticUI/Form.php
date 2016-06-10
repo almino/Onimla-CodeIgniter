@@ -2,7 +2,7 @@
 
 namespace Onimla\CodeIgniter\SemanticUI;
 
-class Form extends \Onimla\SemanticUI\Form\Form {
+class Form extends \Onimla\SemanticUI\Form {
 
     protected $rules;
     protected $values = array();
