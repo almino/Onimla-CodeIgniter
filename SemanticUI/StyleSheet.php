@@ -14,7 +14,7 @@ class StyleSheet extends \Onimla\HTML\Link {
         $href = implode('/', array(
             rtrim(is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL, '/'),
             $this->defaultFolder,
-            (ENVIROMENT == 'production' ? $this->production : $this->fileName) . $this->fileExtension,
+            (ENVIRONMENT == 'production' ? $this->production : $this->fileName) . $this->fileExtension,
         ));
         
         parent::__construct($href);
