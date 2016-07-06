@@ -167,7 +167,7 @@ class Form extends \Onimla\SemanticUI\Form {
         ## ========================================================================== ##
         if (form_error($name)) {
             # Instâncias ================================================================= #
-            $message = new \Onimla\SemanticUI\Message(form_error($name));
+            $message = new \Onimla\SemanticUI\Message(form_error($name, '', ''));
             
             # Atributos ================================================================== #
             $message->error();
