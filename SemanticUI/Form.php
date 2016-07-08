@@ -167,7 +167,7 @@ class Form extends \Onimla\SemanticUI\Form {
         ## ========================================================================== ##
         if (form_error($name)) {
             $field->error();
-            $field->append(new ValidationError($name));
+            $field->append(new ValidationError($field));
         }
         
 
