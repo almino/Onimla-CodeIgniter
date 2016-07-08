@@ -2,6 +2,9 @@
 
 namespace Onimla\CodeIgniter\SemanticUI;
 
+use Onimla\SemanticUI\Form\Field;
+use Onimla\HTML\Node;
+
 class Form extends \Onimla\SemanticUI\Form {
 
     protected $rules;
@@ -56,8 +59,9 @@ class Form extends \Onimla\SemanticUI\Form {
 
         extract($this->getFieldData($name));
 
-        $field = new \Onimla\SemanticUI\Form\Field($label, $name, $default);
+        $field = new Field($label, $name, $default);
         $input = $field->input;
+        $container = new Node($field);
 
         # ============================================================================ #
         # Validation Rules
@@ -167,11 +171,11 @@ class Form extends \Onimla\SemanticUI\Form {
         ## ========================================================================== ##
         if (form_error($name)) {
             $field->error();
-            $field->append(new ValidationError($field));
+            $container->append(new ValidationError($field));
         }
         
 
-        $this->children[$name] = $field;
+        $this->children[$name] = $container;
 
         return $this->children[$name];
     }
