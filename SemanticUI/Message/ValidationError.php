@@ -45,7 +45,7 @@ class ValidationError extends Message {
 
         # Atributos ================================================================== #
         # Semantic UI's default hides messages inside forms. It forces showing.
-        $this->container->getClassAttribute()->after(\Onimla\SemanticUI\Component::CLASS_NAME, 'visible');
+        $this->container->getClassAttribute()->before('error', 'visible');
 
         # Árvore ===================================================================== #
         $label->text($text);
