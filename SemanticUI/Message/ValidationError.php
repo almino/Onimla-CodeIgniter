@@ -1,14 +1,12 @@
 <?php
 
-namespace Onimla\CodeIgniter\SemanticUI;
+namespace Onimla\CodeIgniter\SemanticUI\Message;
 
-use Onimla\SemanticUI\Message;
+use Onimla\SemanticUI\Message\Error\WithWarningSign as Message;
 use Onimla\SemanticUI\Form\Field;
 use Onimla\HTML\Input;
 use Onimla\HTML\ShortQuotation;
 use Onimla\HTML\Label;
-# Modify the icon shown for these messages
-use Onimla\SemanticUI\Icon\WarningSign as Icon;
 
 class ValidationError extends Message {
 
@@ -46,8 +44,6 @@ class ValidationError extends Message {
         $quote = new ShortQuotation();
 
         # Atributos ================================================================== #
-        # This is an error message
-        $this->error();
         # Semantic UI's default hides messages inside forms. It forces showing.
         $this->container->getClassAttribute()->after(\Onimla\SemanticUI\Component::CLASS_NAME, 'visible');
 
@@ -59,11 +55,6 @@ class ValidationError extends Message {
         $content->append($quote);
         $content->appendText(substr($error, $pos));
         $quote->append($label);
-
-        /* -------------------------------------------------------------------------- */
-
-        # Sets the icon
-        $this->icon(new Icon);
     }
 
 }
