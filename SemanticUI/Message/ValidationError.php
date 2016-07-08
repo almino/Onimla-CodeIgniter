@@ -16,7 +16,7 @@ class ValidationError extends Message {
             # Get ID
             $id = $field->id();
             # Get name
-            $field = $field->name()->getValue();
+            $field = $field->name();
         }
 
         # Get error message
