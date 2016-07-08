@@ -23,7 +23,7 @@ class ValidationError extends Message {
 
         # Atributos ================================================================== #
         $this->error();
-        $this->container->getClass('visible');
+        $this->container->getClassAttribute()->after(\Onimla\SemanticUI\Component::CLASS_NAME, 'visible');
 
         # Árvore ===================================================================== #
         $this->icon(new Icon);
