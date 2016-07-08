@@ -61,10 +61,9 @@ class Form extends \Onimla\SemanticUI\Form {
 
         $field = new Field($label, $name, $default);
         $input = $field->input;
-        
-        $container = new Node;
-        $container->field = $field;
 
+        #$container = new Node;
+        #$container->field = $field;
         # ============================================================================ #
         # Validation Rules
         # ============================================================================ #
@@ -173,10 +172,12 @@ class Form extends \Onimla\SemanticUI\Form {
         ## ========================================================================== ##
         if (form_error($name)) {
             $field->error();
-            $container->message = new ValidationError($field);
+            #$container->message = new ValidationError($field);
         }
 
-        $this->children[$name] = $container;
+        #$this->children[$name] = $container;
+
+        $this->children[$name] = $field;
 
         return $this->children[$name];
     }
