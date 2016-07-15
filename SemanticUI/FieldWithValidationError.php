@@ -14,7 +14,7 @@ class FieldWithValidationError extends Node {
 
         if ($error !== NULL) {
             $this->message = $error;
-        } elseif (form_error($field->name())) {
+        } elseif (form_error($field->attr('name'))) {
             $this->message = new ValidationError($field);
         }
     }
