@@ -3,7 +3,7 @@
 namespace Onimla\CodeIgniter\SemanticUI;
 
 use Onimla\SemanticUI\Form\Field;
-use Onimla\HTML\Node;
+use Onimla\CodeIgniter\CrossSiteRequestForgery;
 
 class Form extends \Onimla\SemanticUI\Form {
 
@@ -12,6 +12,8 @@ class Form extends \Onimla\SemanticUI\Form {
 
     public function __construct($rules = '', $method = 'post') {
         parent::__construct($method);
+
+        $this->prepend(new CrossSiteRequestForgery());
 
         $this->setValidationRules($rules);
     }
