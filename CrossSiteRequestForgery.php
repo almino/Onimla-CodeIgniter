@@ -2,7 +2,7 @@
 
 namespace Onimla\CodeIgniter;
 
-#require_once 'Hidden.class.php';
+use Onimla\HTML\Hidden;
 
 class CrossSiteRequestForgery extends Hidden {
 
