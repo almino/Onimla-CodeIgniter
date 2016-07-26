@@ -14,11 +14,11 @@ class ValidationError extends Message {
         # If it is an object
         if ($field instanceof Field OR $field instanceof Input) {
             # Get ID
-            $id = $field->id();
+            $id = $field->id()->getValue();
             # Get name
-            $field = $field->name();
+            $field = $field->name()->getValue();
         }
-
+        
         # Get error message
         $error = trim(form_error($field, ' ', ' '));
         # To use with preg_match
