@@ -46,12 +46,12 @@ echo $usuario;
 <form method="post" class="ui form">
   <input type="hidden" name="csrf_test_name" value="/*-/*-/*-/*-/*-/*-/*-/*-/*-/*-/*" />
   <div class="required field">
-    <label for="579a7cf820701">Endere&ccedil;o de e-mail</label>
-    <input type="email" name="usuario" id="579a7cf820701" required value />
+    <label for="579baa5c2d72a">Endere&ccedil;o de e-mail</label>
+    <input type="email" name="usuario" id="579baa5c2d72a" required value />
   </div>
   <div class="required field">
-    <label for="579a7cf8213b4">Senha</label>
-    <input type="text" name="senha" id="579a7cf8213b4" required maxlength="128" value />
+    <label for="579baa5c2e051">Senha</label>
+    <input type="text" name="senha" id="579baa5c2e051" required maxlength="128" value />
   </div>
 </form>
 ```
