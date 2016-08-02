@@ -18,7 +18,7 @@ class ValidationError extends Message {
             # Get name
             $field = $field->name()->getValue();
         }
-        
+
         # Get error message
         $error = trim(form_error($field, ' ', ' '));
         # To use with preg_match
@@ -26,16 +26,18 @@ class ValidationError extends Message {
         # Matches an HTML string
         #preg_match('/<([:\w\-\.\d\[\]]+)>(.*)<\/[:\w\-\.\d\[\]]+>/', $error, $matches);
         # Matches a short quotation
-        preg_match('/<q>(.*)<\/q>/', $error, $matches);
-        # Get data from preg_match
-        list($html, $text) = $matches;
-        # Where to break the error message
-        $pre = strpos($error, $html);
-        $pos = $pre + strlen($html);
+        $hasHTML = preg_match('/<q>(.*)<\/q>/', $error, $matches);
+        if ($hasHTML) {
+            # Get data from preg_match
+            list($html, $text) = $matches;
+            # Where to break the error message
+            $pre = strpos($error, $html);
+            $pos = $pre + strlen($html);
+        }
 
         # Instâncias ================================================================= #
         # Creates a message
-        parent::__construct(substr($error, 0, $pre));
+        parent::__construct($hasHTML ? substr($error, 0, $pre) : $error);
         # Get its content
         $content = $this->content->first();
         # Create a label
@@ -48,13 +50,15 @@ class ValidationError extends Message {
         $this->container->getClassAttribute()->before('error', 'visible');
 
         # Árvore ===================================================================== #
-        $label->text($text);
+        if ($hasHTML) {
+            $label->text($text);
 
-        /* -------------------------------------------------------------------------- */
-        
-        $content->append($quote);
-        $content->appendText(substr($error, $pos));
-        $quote->append($label);
+            /* -------------------------------------------------------------------------- */
+
+            $content->append($quote);
+            $content->appendText(substr($error, $pos));
+            $quote->append($label);
+        }
     }
 
 }
