@@ -18,8 +18,8 @@ class Item extends BaseItem {
      * @param type $url
      */
     public function href($url = FALSE) {
-        $url = func_get_args();
-        
+        $url = site_url(func_get_args());
+
         $this->unsetActive();
 
         if (function_exists('current_url') AND current_url() == $url) {
@@ -34,7 +34,7 @@ class Item extends BaseItem {
             }
         }
 
-        parent::href(site_url($url));
+        parent::href($url);
     }
 
 }
