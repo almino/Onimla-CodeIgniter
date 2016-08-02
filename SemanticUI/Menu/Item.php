@@ -19,6 +19,8 @@ class Item extends BaseItem {
      */
     public function href($url = FALSE) {
         $url = func_get_args();
+        
+        $this->unsetActive();
 
         if (function_exists('current_url') AND current_url() == $url) {
             $this->setActive();
