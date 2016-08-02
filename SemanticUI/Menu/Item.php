@@ -22,9 +22,9 @@ class Item extends BaseItem {
 
         $this->unsetActive();
 
-        if (function_exists('current_url') AND current_url() == $url) {
+        if (current_url() == $url) {
             $this->setActive();
-        } elseif ($this->ignoreSegment > 0 AND function_exists('site_url') AND function_exists('current_url')) {
+        } elseif ($this->ignoreSegment > 0) {
             $segments = new stdClass();
             $segments->current = array_slice(explode('/', trim(substr(current_url(), strlen(site_url())), '/')), 0, $this->ignoreSegment - 1);
             $segments->href = array_slice(explode('/', trim(substr($url, strlen(site_url())), '/')), 0, $this->ignoreSegment - 1);
