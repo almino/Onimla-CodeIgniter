@@ -18,7 +18,7 @@ class Item extends BaseItem {
      * @param type $url
      */
     public function href($url = FALSE) {
-        $url = site_url(func_get_args());
+        $url = site_url(self::arrayFlatten(func_get_args()));
 
         $this->unsetActive();
 
