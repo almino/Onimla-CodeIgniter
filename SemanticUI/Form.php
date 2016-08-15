@@ -2,7 +2,7 @@
 
 namespace Onimla\CodeIgniter\SemanticUI;
 
-use Onimla\SemanticUI\Form\Field;
+use Onimla\CodeIgniter\SemanticUI\Form\Field;
 use Onimla\CodeIgniter\CrossSiteRequestForgery;
 
 class Form extends \Onimla\SemanticUI\Form {
@@ -168,14 +168,6 @@ class Form extends \Onimla\SemanticUI\Form {
         }
 
         log_section_footer('debug');
-
-        ## ========================================================================== ##
-        ## Error
-        ## ========================================================================== ##
-        if (form_error($name)) {
-            $field->error();
-            #$container->message = new ValidationError($field);
-        }
 
         #$this->children[$name] = $container;
 
