@@ -117,7 +117,7 @@ class Form extends \Onimla\SemanticUI\Form {
                 case 'valid_time':
                     $input->attr('type', 'time');
                     break;
-                case 'url':
+                case 'valid_url':
                     $input->attr('type', 'url');
                     break;
                 default :
