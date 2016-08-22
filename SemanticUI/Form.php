@@ -4,9 +4,8 @@ namespace Onimla\CodeIgniter\SemanticUI;
 
 use Onimla\CodeIgniter\SemanticUI\Form\Field;
 use Onimla\CodeIgniter\CrossSiteRequestForgery;
-use Onimla\HTML\Label;
 use Onimla\HTML\Hidden;
-use Onimla\HTML\Checkbox;
+use Onimla\SemanticUI\Form\Checkbox;
 
 class Form extends \Onimla\SemanticUI\Form {
 
@@ -195,15 +194,10 @@ class Form extends \Onimla\SemanticUI\Form {
         extract($field);
 
         # Instâncias ================================================================= #
-        $checkbox = new Checkbox($name, 1);
+        $checkbox = new Checkbox($label, $name, 1);
         $hidden = new Hidden($name, 0);
-        $label = new Label($checkbox, $label);
 
         # Atributos ================================================================== #
-        # Árvore ===================================================================== #
-        $label->hidden = $hidden;
-        $label->checkbox = $checkbox;
-
         if (key_exists($name, $this->values)) {
             $this->values[$name] ? $checkbox->check() : $checkbox->uncheck();
         }
@@ -220,7 +214,11 @@ class Form extends \Onimla\SemanticUI\Form {
             $checkbox->uncheck();
         }
 
-        return $label;
+        # Árvore ===================================================================== #
+        #$checkbox->prepend($hidden);
+
+        $this->children[$name] = $checkbox;
+        return $checkbox;
     }
 
     /**
