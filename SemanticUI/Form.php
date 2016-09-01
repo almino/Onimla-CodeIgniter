@@ -260,8 +260,8 @@ class Form extends \Onimla\SemanticUI\Form {
         }
 
         # Árvore ===================================================================== #
-        $group->container()->removeChild($group->control());
-        $group->control($select);
+        $group->unsetInput();
+        $group->input($select);
 
         $select->prepend($disabled);
 
