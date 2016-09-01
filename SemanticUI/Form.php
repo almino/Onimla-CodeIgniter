@@ -6,6 +6,7 @@ use Onimla\CodeIgniter\SemanticUI\Form\Field;
 use Onimla\CodeIgniter\CrossSiteRequestForgery;
 use Onimla\HTML\Hidden;
 use Onimla\SemanticUI\Form\Checkbox;
+use Onimla\SemanticUI\Form\Dropdown;
 
 class Form extends \Onimla\SemanticUI\Form {
 
@@ -234,13 +235,9 @@ class Form extends \Onimla\SemanticUI\Form {
 
         # Instâncias ================================================================= #
         $group = $this->getTextInput($name, $default);
-        $select = new \Onimla\HTML\Select($group->name(), $options);
-        $disabled = new \Onimla\HTML\Option(0, 'Selecione…');
+        $dropdown = new Dropdown($group->name(), $options);
 
         # Atributos ================================================================== #
-        $disabled->select();
-        $disabled->disable();
-
         if (key_exists($name, $this->values) AND $default === FALSE) {
             $default = $this->values[$name];
         }
@@ -252,8 +249,7 @@ class Form extends \Onimla\SemanticUI\Form {
         foreach ($options as $option) {
             /* @var $option \Onimla\HTML\Option */
             if ($option->value() == $default) {
-                $select->deselectAll();
-                $disabled->deselect();
+                $dropdown->deselectAll();
                 $option->select();
                 break;
             }
@@ -261,9 +257,7 @@ class Form extends \Onimla\SemanticUI\Form {
 
         # Árvore ===================================================================== #
         $group->unsetInput();
-        $group->input($select);
-
-        $select->prepend($disabled);
+        $group->input($dropdown);
 
         # Exibição =================================================================== #
         return $group;
