@@ -135,8 +135,10 @@ class Form extends \Onimla\SemanticUI\Form {
         log_debug(__CLASS__ . "::values['{$name}']` = " . (key_exists($name, $this->values) ? var_to_log($this->values[$name]) : 'none'));
         log_debug("`\$default` = " . var_to_log($default));
 
-        # Pega o valor padrão definido pelo CodeIgniter
-        $input->value(set_value($name));
+        if (strlen(set_value($name)) > 0) {
+            # Pega o valor padrão definido pelo CodeIgniter
+            $input->value(set_value($name));
+        }
 
         # Verifica se NÃO há um valor no campo
         if (!$input->isValueSet()) {
