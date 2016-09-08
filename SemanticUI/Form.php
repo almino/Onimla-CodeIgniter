@@ -248,10 +248,18 @@ class Form extends \Onimla\SemanticUI\Form {
 
         foreach ($options as $option) {
             /* @var $option \Onimla\HTML\Option */
-            if (!is_bool($default) AND $option->value() == $default) {
-                $dropdown->deselectAll();
-                $option->select();
-                break;
+            if (strlen($option->value()) > 0 AND strlen($default) > 0) {
+                if ($option->value() == $default) {
+                    $dropdown->deselectAll();
+                    $option->select();
+                    break;
+                }
+            } elseif (strlen($default) > 0) {
+                if (html_entity_decode($option->text()) == html_entity_decode($default)) {
+                    $dropdown->deselectAll();
+                    $option->select();
+                    break;
+                }
             }
         }
 
