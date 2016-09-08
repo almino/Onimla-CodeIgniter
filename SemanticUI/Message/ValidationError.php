@@ -3,8 +3,7 @@
 namespace Onimla\CodeIgniter\SemanticUI\Message;
 
 use Onimla\SemanticUI\Message\Error\WithWarningSign as Message;
-use Onimla\SemanticUI\Form\Field;
-use Onimla\HTML\Input;
+use Onimla\HTML\Polymorphism\UserInput;
 use Onimla\HTML\ShortQuotation;
 use Onimla\HTML\Label;
 
@@ -12,7 +11,7 @@ class ValidationError extends Message {
 
     public function __construct($field = FALSE, $id = FALSE) {
         # If it is an object
-        if ($field instanceof Field OR $field instanceof Input) {
+        if ($field instanceof UserInput) {
             # Get ID
             $id = $field->id()->getValue();
             # Get name
