@@ -2,6 +2,8 @@
 
 namespace Onimla\CodeIgniter;
 
+use Onimla\HTML\Script;
+
 class JavaScript extends \Onimla\HTML\Node {
 
     public $baseURL = 'base_url';
@@ -82,11 +84,11 @@ class JavaScript extends \Onimla\HTML\Node {
                   var_dump($filepath);
                  */
 
-                if (defined('ENVIROMENT') AND ENVIROMENT == 'production' AND file_exists(FCPATH . $production)) {
-                    $links->append(new \Onimla\HTML\Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $production));
+                if (defined('ENVIRONMENT') AND ENVIRONMENT == 'production' AND file_exists(FCPATH . $production)) {
+                    $links->append(new Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $production));
                 } elseif (file_exists(FCPATH . $filepath)) {
                     # Verifica se o arquivo existe
-                    $links->append(new \Onimla\HTML\Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $filepath));
+                    $links->append(new Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $filepath));
                 }
             }
 
@@ -123,7 +125,7 @@ class JavaScript extends \Onimla\HTML\Node {
 
         $this->log('$filepath = ' . $filepath);
 
-        $link = new \Onimla\HTML\Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $filepath);
+        $link = new Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $filepath);
 
         $this->append($link);
 
