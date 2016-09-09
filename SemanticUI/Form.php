@@ -3,6 +3,7 @@
 namespace Onimla\CodeIgniter\SemanticUI;
 
 use Onimla\CodeIgniter\SemanticUI\Form\Field;
+use Onimla\HTML\Polymorphism\UserInput;
 use Onimla\CodeIgniter\CrossSiteRequestForgery;
 use Onimla\HTML\Hidden;
 use Onimla\SemanticUI\Form\Checkbox;
@@ -55,7 +56,7 @@ class Form extends \Onimla\SemanticUI\Form {
      * @param string $default
      * @return \Onimla\SemanticUI\Form\Field
      */
-    public function &getTextInput($name, $default = FALSE) {
+    public function &getTextInput($name, $default = FALSE, UserInput $instance = null) {
         get_instance()->load->helper(array('form', 'log'));
 
         if ($this->exists($name)) {
@@ -64,8 +65,16 @@ class Form extends \Onimla\SemanticUI\Form {
 
         extract($this->getFieldData($name));
 
-        $field = new Field($label, $name, $default);
+        $field = is_null($instance) ? new Field($label, $name, $default) : $instance;
         $input = $field->input;
+
+        if (method_exists($field, 'label') AND strlen($field->text()) < 1) {
+            $field->label($label);
+        }
+
+        if (strlen($field->name()) < 1) {
+            $field->name($label);
+        }
 
         #$container = new Node;
         #$container->field = $field;
