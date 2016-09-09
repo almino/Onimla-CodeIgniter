@@ -68,7 +68,7 @@ class Form extends \Onimla\SemanticUI\Form {
         $field = is_null($instance) ? new Field($label, $name, $default) : $instance;
         $input = $field->input;
 
-        if (method_exists($field, 'label') AND strlen($field->text()) < 1) {
+        if (method_exists($field, 'label') AND strlen($field->label()->text()) < 1) {
             $field->label($label);
         }
 
