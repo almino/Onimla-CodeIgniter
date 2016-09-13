@@ -2,6 +2,9 @@
 
 namespace Onimla\CodeIgniter;
 
+use Onimla\HTML\Node;
+use Onimla\HTML\Link;
+
 class StyleSheet extends \Onimla\HTML\Node {
 
     public $baseURL = 'base_url';
@@ -61,7 +64,7 @@ class StyleSheet extends \Onimla\HTML\Node {
         # Se possui algum arquivo CSS a ser importado
         if ($this->CI->config->item($uri, 'css')) {
 
-            $links = new \Onimla\HTML\Node();
+            $links = new Node();
 
             # Percorre todos os arquivos
             foreach ($this->CI->config->item($uri, 'css') as $file) {
@@ -77,13 +80,14 @@ class StyleSheet extends \Onimla\HTML\Node {
                 }
 
                 /*
+                  var_dump($file);
                   var_dump(FCPATH);
                   var_dump($filepath);
                  */
 
                 # Verifica se o arquivo existe
                 if (file_exists(FCPATH . $filepath)) {
-                    $links->append(new \Onimla\HTML\Link(is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL . $filepath));
+                    $links->append(new Link(is_callable($this->baseURL) ? call_user_func($this->baseURL, $filepath) : ($this->baseURL . $filepath)));
                 }
             }
 
