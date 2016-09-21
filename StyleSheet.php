@@ -76,6 +76,7 @@ class StyleSheet extends \Onimla\HTML\Node {
 
                 # Coloca a extensão do arquivo, caso não tenha sido informada 
                 if (!strstr($filepath, $this->fileExtension)) {
+                    $production = "{$filepath}.min{$this->fileExtension}";
                     $filepath .= $this->fileExtension;
                 }
 
@@ -86,7 +87,9 @@ class StyleSheet extends \Onimla\HTML\Node {
                  */
 
                 # Verifica se o arquivo existe
-                if (file_exists(FCPATH . $filepath)) {
+                if (defined('ENVIRONMENT') AND ENVIRONMENT != 'development' AND file_exists(FCPATH . $production)) {
+                    $links->append(new Link(is_callable($this->baseURL) ? call_user_func($this->baseURL, $production) : ($this->baseURL . $production)));
+                } elseif (file_exists(FCPATH . $filepath)) {
                     $links->append(new Link(is_callable($this->baseURL) ? call_user_func($this->baseURL, $filepath) : ($this->baseURL . $filepath)));
                 }
             }

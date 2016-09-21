@@ -84,7 +84,7 @@ class JavaScript extends \Onimla\HTML\Node {
                   var_dump($filepath);
                  */
 
-                if (defined('ENVIRONMENT') AND ENVIRONMENT == 'production' AND file_exists(FCPATH . $production)) {
+                if (defined('ENVIRONMENT') AND ENVIRONMENT != 'development' AND file_exists(FCPATH . $production)) {
                     $links->append(new Script((is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL) . $production));
                 } elseif (file_exists(FCPATH . $filepath)) {
                     # Verifica se o arquivo existe
