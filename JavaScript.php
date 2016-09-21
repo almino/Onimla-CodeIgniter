@@ -6,6 +6,8 @@ use Onimla\HTML\Script;
 
 class JavaScript extends \Onimla\HTML\Node {
 
+    use Traits\MinifiedFile;
+
     public $baseURL = 'base_url';
     public $defaultFolder = 'js';
     public $fileExtension = '.js';
@@ -79,15 +81,10 @@ class JavaScript extends \Onimla\HTML\Node {
                     $filepath .= $this->fileExtension;
                 }
 
-                /*
-                  var_dump(FCPATH);
-                  var_dump($filepath);
-                 */
+                $filepath = $this->minifiedFile($filepath);
 
-                if (defined('ENVIRONMENT') AND ENVIRONMENT != 'development' AND file_exists(FCPATH . $production)) {
-                    $links->append(new Script(is_callable($this->baseURL) ? call_user_func($this->baseURL, $production) : ($this->baseURL . $production)));
-                } elseif (file_exists(FCPATH . $filepath)) {
-                    # Verifica se o arquivo existe
+                # Verifica se o arquivo existe
+                if (file_exists(FCPATH . $filepath)) {
                     $links->append(new Script(is_callable($this->baseURL) ? call_user_func($this->baseURL, $filepath) : ($this->baseURL . $filepath)));
                 }
             }
@@ -114,6 +111,8 @@ class JavaScript extends \Onimla\HTML\Node {
         if (strpos($filepath, $this->fileExtension) === FALSE) {
             $filepath .= $this->fileExtension;
         }
+
+        $filepath = $this->minifiedFile($filepath);
 
         if (!file_exists(FCPATH . $filepath)) {
             return FALSE;

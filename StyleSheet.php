@@ -7,6 +7,8 @@ use Onimla\HTML\Link;
 
 class StyleSheet extends \Onimla\HTML\Node {
 
+    use Traits\MinifiedFile;
+
     public $baseURL = 'base_url';
     public $defaultFolder = 'css';
     public $fileExtension = '.css';
@@ -21,7 +23,7 @@ class StyleSheet extends \Onimla\HTML\Node {
     public function __construct() {
         parent::__construct();
         $this->CI = & get_instance();
-        
+
         $this->indentSource = TRUE;
         $this->before = "        ";
     }
@@ -76,20 +78,13 @@ class StyleSheet extends \Onimla\HTML\Node {
 
                 # Coloca a extensão do arquivo, caso não tenha sido informada 
                 if (!strstr($filepath, $this->fileExtension)) {
-                    $production = "{$filepath}.min{$this->fileExtension}";
                     $filepath .= $this->fileExtension;
                 }
 
-                /*
-                  var_dump($file);
-                  var_dump(FCPATH);
-                  var_dump($filepath);
-                 */
+                $filepath = $this->minifiedFile($filepath);
 
                 # Verifica se o arquivo existe
-                if (defined('ENVIRONMENT') AND ENVIRONMENT != 'development' AND file_exists(FCPATH . $production)) {
-                    $links->append(new Link(is_callable($this->baseURL) ? call_user_func($this->baseURL, $production) : ($this->baseURL . $production)));
-                } elseif (file_exists(FCPATH . $filepath)) {
+                if (file_exists(FCPATH . $filepath)) {
                     $links->append(new Link(is_callable($this->baseURL) ? call_user_func($this->baseURL, $filepath) : ($this->baseURL . $filepath)));
                 }
             }
@@ -116,6 +111,8 @@ class StyleSheet extends \Onimla\HTML\Node {
         if (strpos($filepath, $this->fileExtension) === FALSE) {
             $filepath .= $this->fileExtension;
         }
+
+        $filepath = $this->minifiedFile($filepath);
 
         if (!file_exists(FCPATH . $filepath)) {
             return FALSE;
