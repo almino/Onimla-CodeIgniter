@@ -14,7 +14,7 @@ class JavaScript extends \Onimla\HTML\Script {
         $src = implode('/', array(
             rtrim(is_callable($this->baseURL) ? call_user_func($this->baseURL) : $this->baseURL, '/'),
             $this->defaultFolder,
-            (ENVIRONMENT == 'production' ? $this->production : $this->fileName) . $this->fileExtension,
+            (ENVIRONMENT != 'development' ? $this->production : $this->fileName) . $this->fileExtension,
         ));
         
         parent::__construct($src);
