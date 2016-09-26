@@ -307,7 +307,10 @@ class Form extends \Onimla\SemanticUI\Form {
     }
 
     public function setValues($values) {
-        #log_var($values);
+        #var_dump($values);die();
+
+        /* */
+
         # Verifica se veio algum valor
         if (is_array($values) AND count($values) > 0) {
             # Coloca na variável para uso em outro método
@@ -315,12 +318,16 @@ class Form extends \Onimla\SemanticUI\Form {
 
             # Para cada valor no array
             foreach ($values as $field => $value) {
+                /*
+                  var_dump($field, key_exists($field, $this->children)
+                  AND method_exists($this->children[$field], 'value'));
+                 */
+
                 # Verifica se o campo existe
                 if (count($this->children) > 0
                         AND key_exists($field, $this->children)
-                        AND property_exists($this->children[$field], 'control')
-                        AND is_callable(array($this->children[$field]->control, 'value'))) {
-                    $this->children[$field]->control->value($value);
+                        AND method_exists($this->children[$field], 'value')) {
+                    $this->children[$field]->value($value);
                 }
             }
 
